@@ -11,7 +11,7 @@ from proveedores_app.models import Students
 from django.contrib import messages
 from Proveedores import settings
 
-@login_required(login_url="/signin")
+@login_required(login_url="/sign-in")
 def formulario_archivos(request):
     if request.method == 'POST':
         student = StudentForm(request.POST, request.FILES)
