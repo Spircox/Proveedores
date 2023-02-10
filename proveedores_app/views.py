@@ -61,16 +61,12 @@ def signup(request):
             myuser.last_name = nit
 
             myuser.save()
-
-            return HttpResponseRedirect(reverse('sign-in'), {'aviso': 'Tu cuenta ha sido creada', 'ind': 1})
         else:
-            #messages.error(request, "Las contraseñas no coinciden")
-            aviso = 'Las contraseñas no coinciden'
-            ind = 0
-            return HttpResponseRedirect(reverse('sign-up'), {'aviso': aviso, 'ind': ind})
+            return redirect('sign-up')
 
-    return render(request, "dashboard/auth/sign-up.html")
-
+        return redirect('sign-in')
+    else:
+        return render(request, 'dashboard/auth/sign-up.html')
 
 def signin(request):
     if request.method == "POST":
