@@ -48,6 +48,18 @@ def index(request):
 
 
 def signup(request):
+    if request.method == 'GET':
+        if 'text' in request.session:
+            text_s = request.session['text']
+            text = text_s['text']
+            icon = text_s['icon']
+            del request.session['text']
+        else:
+            text = "Registre sus datos"
+            icon = "info"
+
+    return render(request, 'dashboard/auth/sign-up.html', {'text': text, 'icon': icon})
+
     if request.method == "POST":
         username = request.POST['username']
         rsocial = request.POST['rsocial']
@@ -61,10 +73,12 @@ def signup(request):
             myuser.last_name = nit
 
             myuser.save()
+            text = "Se creo correctamente su cuenta"
+            icon = "success"
         else:
             return redirect('sign-up')
 
-        return redirect('sign-in')
+        return render(request, 'dashboard/auth/sign-up.html', {'text': text, 'icon': icon})
     else:
         return render(request, 'dashboard/auth/sign-up.html')
 

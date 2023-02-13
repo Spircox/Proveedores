@@ -36,7 +36,8 @@
                               <img src="/static/assets/images/Logo.svg" width="120px" height="120px" style="margin: auto;">
                            </a>
                            <h2 class="mb-3 text-center">Registro</h2>
-                           <form>
+                           <form action="{% url 'sign-up' %}" method="post">
+                               {% csrf_token %}
                               <div class="row">
                                  <div class="col-lg-6">
                                     <div class="form-group">
@@ -111,19 +112,21 @@
     <script src="/static/assets/js/plugins/form-wizard.js"></script>
     <script src="/static/assets/js/hope-ui.js" defer></script>
     <script>
-       $("#btn_res").on('click', function (e) {
+
+        notificationswal("Registro", "{{ text }}", "{{ icon }}", "Salir")
+      /* $("#btn_res").on('click', function (e) {
            var username = $("#username").val();
            var nit = $("#nit").val();
            var email = $("#email").val();
            var rsocial = $("#rsocial").val();
            var passw1 = $("#passw1").val();
            var passw2 = $("#passw2").val();
-                if (passw1 == passw2){
+                if (passw1 === passw2){
                     $.ajax({
-                        url: '{% url "sign-up" %}',
+                        url: '{ url "sign-up" %}',
                         type: 'post',
                         data: {
-                            csrfmiddlewaretoken: '{{ csrf_token }}',
+                            csrfmiddlewaretoken: '{ csrf_token }}',
                             username: username,
                             nit: nit,
                             email: email,
@@ -131,14 +134,14 @@
                             passw1: passw1,
                             passw2: passw2
                         },
-                        success: function(){
+                        complete: function(){
                             notificationswal("OK", "Su cuenta ha sido creada exitosamente", "success", "Salir")
                         }
                     })
                 } else {
                      notificationswal("Error", "Las contraseñas no coinciden", "error", "Salir")
                 }
-        }) 
+        }) */
     </script>
   </body>
 </html>
