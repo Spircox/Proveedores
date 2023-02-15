@@ -76,7 +76,10 @@ def signup(request):
             text = "Se creo correctamente su cuenta"
             icon = "success"
         else:
+            text = "Las contraseñas no coinciden"
+            icon = "error"
             return redirect('sign-up')
+
 
         return render(request, 'dashboard/auth/sign-up.html', {'text': text, 'icon': icon})
     else:
