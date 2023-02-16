@@ -58,7 +58,7 @@ def signup(request):
             text = "Registre sus datos"
             icon = "info"
 
-    return render(request, 'dashboard/auth/sign-up.html', {'text': text, 'icon': icon})
+        return render(request, 'dashboard/auth/sign-up.html', {'text': text, 'icon': icon})
 
     if request.method == "POST":
         username = request.POST['username']
