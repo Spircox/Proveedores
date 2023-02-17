@@ -1,19 +1,10 @@
-<!doctype html>
-<html lang="es" dir="ltr">
-  <head>
+{% extends 'dashboard/plantilla.html' %}
 
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <title>Registro proveedores - KERUI</title>
-      <link rel="shortcut icon" href="/static/assets/images/favicon.ico" />
-      <link rel="stylesheet" href="/static/assets/css/core/libs.min.css" />
-      <link rel="stylesheet" href="/static/assets/css/hope-ui.min.css?v=1.2.0" />
-      <link rel="stylesheet" href="/static/assets/css/custom.min.css?v=1.2.0" />
-      <link rel="stylesheet" href="/static/assets/css/dark.min.css"/>
-      <link rel="stylesheet" href="/static/assets/css/customizer.min.css" />
-      <link rel="stylesheet" href="/static/assets/css/rtl.min.css"/>
+{% block title %}
+    Registro proveedores - KERUI
+{% endblock %}
 
-  </head>
+{% block content %}
   <body data-bs-spy="scroll" data-bs-target="#elements-section" data-bs-offset="0" tabindex="0">
     <!-- loader Start -->
     <div id="loading">
@@ -37,7 +28,7 @@
                               <img src="/static/assets/images/Logo.svg" width="120px" height="120px" style="margin: auto;">
                            </a>
                            <h2 class="mb-3 text-center">Registro</h2>
-                           <form action="{% url 'sign-up' %}" method="post">
+                           <form method="post" action={% url 'sign-up' %}>
                                {% csrf_token %}
                               <div class="row">
                                  <div class="col-lg-6">
@@ -102,22 +93,13 @@
          </div>
       </section>
       </div>
-    <script src="/static/assets/js/core/libs.min.js"></script>
-    <script src="/static/assets/js/core/external.min.js"></script>
-    <script src="/static/assets/js/charts/widgetcharts.js"></script>
-    <script src="/static/assets/js/charts/vectore-chart.js"></script>
-    <script src="/static/assets/js/charts/dashboard.js" ></script>
-    <script src="/static/assets/js/plugins/fslightbox.js"></script>
-    <script src="/static/assets/js/plugins/setting.js"></script>
-    <script src="/static/assets/js/plugins/slider-tabs.js"></script>
-    <script src="/static/assets/js/plugins/form-wizard.js"></script>
-    <script src="/static/assets/js/hope-ui.js" defer></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="/static/assets/js/sweetalerts2/notification.js"></script>
-    <script>
+{% endblock %}
 
-        notificationswal("Registro", "{{ text }}", "{{ icon }}", "Salir")
-      /* $("#btn_res").on('click', function (e) {
+{% block scripts%}
+    <script>
+         notificationswal("Anuncio", "{{ text }}", "{{ icon }}", "Salir")
+
+        /* $("#btn_res").on('click', function (e) {
            var username = $("#username").val();
            var nit = $("#nit").val();
            var email = $("#email").val();
@@ -126,7 +108,7 @@
            var passw2 = $("#passw2").val();
                 if (passw1 === passw2){
                     $.ajax({
-                        url: '{ url "sign-up" %}',
+                        url: '{ url "sign-up" }',
                         type: 'post',
                         data: {
                             csrfmiddlewaretoken: '{ csrf_token }}',
@@ -146,5 +128,5 @@
                 }
         }) */
     </script>
+{% endblock %}
   </body>
-</html>

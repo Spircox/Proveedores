@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <title>KERUI</title>
+      <title>{% block title %}{% endblock %}</title>
       <link rel="shortcut icon" href="/static/assets/images/favicon.ico" />
       <link rel="stylesheet" href="/static/assets/css/core/libs.min.css" />
       <link rel="stylesheet" href="/static/assets/css/hope-ui.min.css?v=1.2.0" />
@@ -11,10 +11,15 @@
       <link rel="stylesheet" href="/static/assets/css/dark.min.css"/>
       <link rel="stylesheet" href="/static/assets/css/customizer.min.css" />
       <link rel="stylesheet" href="/static/assets/css/rtl.min.css"/>
+
+      <style></style>
+      {% block style %}{% endblock %}
   </head>
 
   <body>
-  </body>
+    {% block breadcum %}{% endblock %}
+    {% block content %}{% endblock %}
+
 
     <script src="/static/assets/js/core/libs.min.js"></script>
     <script src="/static/assets/js/core/external.min.js"></script>
@@ -28,5 +33,6 @@
     <script src="/static/assets/js/hope-ui.js" defer></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="/static/assets/js/sweetalerts2/notification.js"></script>
+    {% block scripts %}{% endblock %}
   </body>
 </html>
