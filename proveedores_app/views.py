@@ -107,7 +107,7 @@ def signin(request):
 
 def signout(request):
     logout(request)
-    aviso = "Cierre de sesión exitoso"
-    ind = 2
-    request.session['aviso'] = {'aviso': aviso, 'ind': ind}
+    text = "Cierre de sesión exitoso"
+    icon = 'success'
+    request.session['text'] = {'text': text, 'icon': icon}
     return redirect('sign-in')
