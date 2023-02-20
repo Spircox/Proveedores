@@ -35,6 +35,8 @@ def formulario_archivos(request):
 @login_required(login_url="/signin")
 def index(request):
     if request.method == 'GET':
+        usuario = User.objects.get(username=request.user)
+
         if 'aviso' in request.session:
             aviso_s = request.session['aviso']
             aviso = aviso_s['aviso']
@@ -44,7 +46,7 @@ def index(request):
             aviso = "Bienvenido"
             ind = 1
 
-    return render(request, 'dashboard/index.html', {'aviso': aviso, 'ind': ind})
+    return render(request, 'dashboard/index.html', {'aviso': aviso, 'ind': ind, 'user': usuario})
 
 
 def signup(request):
