@@ -67,7 +67,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="">
+                    <a class="nav-link active" aria-current="page" href="{% url 'form_archiv' %}">
                         <i class="icon">
                             <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path opacity="0.4"
@@ -385,8 +385,8 @@
                          data-bs-original-title="Theme-1">
                         <svg class="customizer-btn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32"
                              height="32">
-                            <circle cx="12" cy="12" r="10" fill="#00C3F9"/>
-                            <path d="M2,12 a1,1 1 1,0 20,0" fill="#573BFF"/>
+                            <circle cx="12" cy="12" r="10" fill="#00C3F9"></circle>
+                            <path d="M2,12 a1,1 1 1,0 20,0" fill="#573BFF"></path>
                         </svg>
                     </div>
                     <div class="btn-border" data-value="theme-color-gray" data-info="#FD8D00" data-setting="color-mode1"
@@ -394,8 +394,8 @@
                          data-bs-original-title="Theme-2">
                         <svg class="customizer-btn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32"
                              height="32">
-                            <circle cx="12" cy="12" r="10" fill="#91969E"/>
-                            <path d="M2,12 a1,1 1 1,0 20,0" fill="#FD8D00"/>
+                            <circle cx="12" cy="12" r="10" fill="#91969E"></circle>
+                            <path d="M2,12 a1,1 1 1,0 20,0" fill="#FD8D00"></path>
                         </svg>
                     </div>
                     <div class="btn-border" data-value="theme-color-red" data-info="#366AF0" data-setting="color-mode1"
@@ -403,8 +403,8 @@
                          data-bs-original-title="Theme-3">
                         <svg class="customizer-btn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32"
                              height="32">
-                            <circle cx="12" cy="12" r="10" fill="#DB5363"/>
-                            <path d="M2,12 a1,1 1 1,0 20,0" fill="#366AF0"/>
+                            <circle cx="12" cy="12" r="10" fill="#DB5363"></circle>
+                            <path d="M2,12 a1,1 1 1,0 20,0" fill="#366AF0"></path>
                         </svg>
                     </div>
                     <div class="btn-border" data-value="theme-color-yellow" data-info="#6410F1"
@@ -412,8 +412,8 @@
                          title="" data-bs-original-title="Theme-4">
                         <svg class="customizer-btn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32"
                              height="32">
-                            <circle cx="12" cy="12" r="10" fill="#EA6A12"/>
-                            <path d="M2,12 a1,1 1 1,0 20,0" fill="#6410F1"/>
+                                                                                                                                                                                                                            c <circle cx="12" cy="12" r="10" fill="#EA6A12"></circle>
+                            <path d="M2,12 a1,1 1 1,0 20,0" fill="#6410F1"></path>
                         </svg>
                     </div>
                     <div class="btn-border" data-value="theme-color-pink" data-info="#25C799" data-setting="color-mode1"
@@ -421,8 +421,8 @@
                          data-bs-original-title="Theme-5">
                         <svg class="customizer-btn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32"
                              height="32">
-                            <circle cx="12" cy="12" r="10" fill="#E586B3"/>
-                            <path d="M2,12 a1,1 1 1,0 20,0" fill="#25C799"/>
+                            <circle cx="12" cy="12" r="10" fill="#E586B3"></circle>
+                            <path d="M2,12 a1,1 1 1,0 20,0" fill="#25C799"></path>
                         </svg>
                     </div>
 
@@ -624,5 +624,15 @@
 <script src="/static/assets/js/plugins/form-wizard.js"></script>
 <script src="/static/assets/vendor/aos/dist/aos.js"></script>
 <script src="/static/assets/js/hope-ui.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/static/assets/js/sweetalerts2/notification.js"></script>
+<script>
+    if ('{{ text }}'.length === 0 && '{{ icon }}'.length === 0){
+        //pass
+    } else {
+        notificationswal("Anuncio", "{{ text }}", "{{ icon }}", "Salir")
+    }
+
+</script>
 </body>
 </html>

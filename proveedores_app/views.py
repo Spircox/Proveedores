@@ -1,3 +1,4 @@
+import datetime
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -6,47 +7,55 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 
 from proveedores_app.functions import *
-from proveedores_app.forms import StudentForm
-from proveedores_app.models import Students
-from django.contrib import messages
-from Proveedores import settings
+from proveedores_app.forms import proveedoresForm
+from proveedores_app.models import Proveedores
 
 @login_required(login_url="/sign-in")
 def formulario_archivos(request):
     if request.method == 'POST':
-        student = StudentForm(request.POST, request.FILES)
-        students = Students()
-        if student.is_valid():
-            students.bfirstname = request.POST['firstname']
-            students.blastname = request.POST['lastname']
-            students.bemail = request.POST['email']
-            students.bnit = request.POST['nit']
-            handle_uploaded_file(request.FILES['file'], request.POST['nit'])
-            handle_uploaded_file_rut(request.FILES['file2'], request.POST['nit'])
-            students.bfile = True
-            students.bfile2 = True
-            students.save()
-            return HttpResponse("File uploaded successfuly")
+        proveedor = proveedoresForm(request.POST, request.FILES)
+        proveedores = Proveedores()
+        usuario = User.objects.get(username=request.user)
+        if proveedor.is_valid():
+            proveedores.bfirstname = usuario.first_name
+            proveedores.bemail = usuario.email
+            proveedores.bnit = usuario.last_name
+            proveedores.id_usr = usuario
+            handle_uploaded_file(request.FILES['file'], proveedores.bnit)
+            handle_uploaded_file2(request.FILES['file2'], proveedores.bnit)
+            handle_uploaded_file3(request.FILES['file3'], proveedores.bnit)
+            handle_uploaded_file4(request.FILES['file4'], proveedores.bnit)
+            proveedores.bfile = True
+            proveedores.bfile2 = True
+            proveedores.bfile3 = True
+            proveedores.bfile4 = True
+            proveedores.fecha_s = datetime.date.today()
+            proveedores.save()
+
+            text = "Archivos cargados correctamente"
+            icon = "success"
+            request.session['text'] = {'text': text, 'icon': icon}
+            return HttpResponseRedirect(reverse("inicio"))
     else:
-        student = StudentForm()
-        return render(request, "form/form_files.html", {'form': student})
+        proveedores = proveedoresForm()
+        return render(request, "form/form_files.html", {'form': proveedores})
 
 
 @login_required(login_url="/signin")
 def index(request):
     if request.method == 'GET':
         usuario = User.objects.get(username=request.user)
+        if 'text' in request.session:
+            text_s = request.session['text']
+            text = text_s['text']
+            icon = text_s['icon']
 
-        if 'aviso' in request.session:
-            aviso_s = request.session['aviso']
-            aviso = aviso_s['aviso']
-            ind = aviso_s['ind']
-            del request.session['aviso']
+            del request.session['text']
         else:
-            aviso = "Bienvenido"
-            ind = 1
+            text = ""
+            icon = ""
 
-    return render(request, 'dashboard/index.html', {'aviso': aviso, 'ind': ind, 'user': usuario})
+    return render(request, 'dashboard/index.html', {'text': text, 'icon': icon, 'user': usuario})
 
 
 def signup(request):
